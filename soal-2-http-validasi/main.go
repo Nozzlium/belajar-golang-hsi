@@ -48,7 +48,7 @@ func (controller *AgeController) Validate(w http.ResponseWriter, r *http.Request
 	}
 
 	if method := r.Method; method != "GET" {
-		http.Error(w, "invalid method", http.StatusMethodNotAllowed)
+		http.Error(w, ErrMethodNotAllowd.Error(), http.StatusMethodNotAllowed)
 	}
 
 	email := r.URL.Query().Get("email")
