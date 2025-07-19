@@ -10,6 +10,8 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
+var ErrMethodNotAllowd = errors.New("method not allowed")
+var ErrInvalidAge = errors.New("umur tidak valid")
 var ErrInvalidInput = errors.New("email kosong atau umur kurang dari 18")
 
 type AgeService struct {
@@ -53,13 +55,14 @@ func (controller *AgeController) Validate(w http.ResponseWriter, r *http.Request
 	ageString := r.URL.Query().Get("age")
 	age, err := strconv.Atoi(ageString)
 	if err != nil {
-		http.Error(w, "invalid age format", http.StatusBadRequest)
+		http.Error(w, ErrInvalidAge.Error(), http.StatusBadRequest)
 	}
 
 	encoder := json.NewEncoder(w)
 	w.Header().Set("Content-Type", "application/json")
 	status, err := controller.AgeService.Validate(email, age)
 	if err != nil && errors.Is(err, ErrInvalidInput) {
+		w.WriteHeader(http.StatusBadRequest)
 		encoder.Encode(Response{
 			Error: "email kosong atau umur kurang dari 18",
 		})
