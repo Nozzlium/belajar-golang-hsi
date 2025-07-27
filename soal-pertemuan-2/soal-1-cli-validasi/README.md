@@ -9,7 +9,7 @@ simply
 ```bash
 go run main.go 
 ```
-di folder soal-2-http-validasi
+di folder soal-1-cli-validasi
 ## Usage
 contoh:
 ```bash

@@ -18,7 +18,7 @@ curl "http://localhost:8080/validate?email=test@example.com&age=20"
 {"status":"ok"}
 ```
 ```bash
-curl "http://localhost:8080/validate?email=test@example.com&age=20"
+curl "http://localhost:8080/validate?email=test@example.com&age=10"
 # returns
 {"error":"email kosong atau umur kurang dari 18"}
 ```
